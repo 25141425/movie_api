@@ -3,3 +3,9 @@
 URL: /documentation.html
 Timestamp: Fri Sep 13 2024 15:06:48 GMT+0200 (Mitteleuropäische Sommerzeit)
 
+::ffff:127.0.0.1 - - [18/Sep/2024:08:53:31 +0000] "GET / HTTP/1.1" 200 18 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"
+::ffff:127.0.0.1 - - [18/Sep/2024:10:00:35 +0000] "GET /movies HTTP/1.1" 200 115 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"
+::ffff:127.0.0.1 - - [18/Sep/2024:10:03:42 +0000] "GET / HTTP/1.1" 200 17 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"
+::ffff:127.0.0.1 - - [18/Sep/2024:11:13:12 +0000] "GET /documentation.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"
+::ffff:127.0.0.1 - - [18/Sep/2024:11:15:40 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"
+::ffff:127.0.0.1 - - [18/Sep/2024:11:15:48 +0000] "GET /movies HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0"

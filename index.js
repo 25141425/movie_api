@@ -1,24 +1,40 @@
+// Importing modules
 const express = require('express'),
   morgan = require('morgan'),
-  fs = require('fs'), // importing node modules fs and path 
-  path = require('path');
+  fs = require('fs'),  
+  path = require('path'),
+  bodyParser = require('body-parser'),
+  methodOverride = require('method-override'),
+  uuid = require('uuid');
 
 const app = express();
 
 let topMovies = [
   {
     title: 'Pulp Fiction',
-    year: 1994
+    year: 1994,
+    genre: 'Thriller',
+    director: 'Quentin Tarantino'
   },
   {
     title: 'Forrest Gump',
-    year: 1994
+    year: 1994,
+    genre: 'Comedy',
+    director: 'Robert Zemeckis'
   },
   {
     title: 'American Beauty',
-    year: 1999
-  }
+    year: 1999,
+    genre: 'Drama',
+    director: 'Sam Mendes'
+  },
 ];
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
 // create write stream (in append mode)
 // create log.txt file in root directory
@@ -37,17 +53,40 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
-// Start error handling
-const bodyParser = require('body-parser'),
-  methodOverride = require('method-override');
+app.get('/movies/:title', (req, res) => {
+  res.json(topMovies.find((movie) =>
+    { return movie.title === req.params.title }));
+});
 
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-  
-  app.use(bodyParser.json());
-  app.use(methodOverride());
-  
+app.get('/genre/:genreName', (req, res) => {
+  res.json('JSON object with genre description');
+});
+
+app.get('/directors/:name', (req, res) => {
+  res.json('JSON object with data about director (bio, birth year, death year)');
+});
+
+app.post('/users', (req, res) => {
+  res.json('JSON object with data about new user, including id');
+});
+
+app.put('/users/:id', (req, res) => {
+  res.json('JSON object with updated user data');
+});
+
+app.post('/users/:id/favorites', (req, res) => {
+  res.send('Text message that movie was added to favorites');
+});
+
+app.delete('/users/:id/favorites', (req, res) => {
+  res.send('Text message that movie was deleted');
+});
+
+app.delete('/users/:id', (req, res) => {
+  res.send('Text message that user was deleted');
+});
+
+// Start error handling
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('An error occurred!');

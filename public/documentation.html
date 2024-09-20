@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Movie API</title>
 </head>
 <body>
@@ -11,5 +12,100 @@
       movies, directors, and genres. Users will be able to sign up, update their
       personal information, and create a list of their favorite movies.
   </p>
+  <h2>API Endpoints</h2>
+  <table>
+    <tr>
+      <th>Business Logic</th>
+      <th>URL</th>
+      <th>HTTP Method</th>
+      <th>Query Parameters</th>
+      <th>Request Body Data Format</th>
+      <th>Response Body Data Format</th>
+    </tr>
+    <tr>
+      <td>Return all movies</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>None</td>
+      <td>JSON object with all movies</td>
+    </tr>
+    <tr>
+      <td>Return all data about a movie by title</td>
+      <td>/movies/:title</td>
+      <td>GET</td>
+      <td>title (URL parameter)</td>
+      <td>None</td>
+      <td>JSON object with data about single movie (description, genre, director, image URL, whether it’s featured or not)</td>
+    </tr>
+    <tr>
+      <td>Return data about genre by title</td>
+      <td>/genre/:genreName</td>
+      <td>GET</td>
+      <td>genreName (URL parameter)</td>
+      <td>None</td>
+      <td>JSON object with genre description</td>
+    </tr>
+    <tr>
+      <td>Return data about director by name</td>
+      <td>/directors/:name</td>
+      <td>GET</td>
+      <td>name (URL parameter)</td>
+      <td>None</td>
+      <td>JSON object with data about director (bio, birth year, death year)</td>
+    </tr>
+    <tr>
+      <td>Allow users to register</td>
+      <td>/users</td>
+      <td>POST</td>
+      <td>None</td>
+      <td>JSON object with user data (name, email, birthdate)</td>
+      <td>JSON object with data about new user, including id</td>
+    </tr>
+    <tr>
+      <td>Allow users to update their info</td>
+      <td>/users/:id</td>
+      <td>PUT</td>
+      <td>id (URL parameter)</td>
+      <td>JSON object with updated user data</td>
+      <td>JSON object with updated user data</td>
+    </tr>
+    <tr>
+      <td>Allow users to add movie to favorites</td>
+      <td>/users/:id/favorites/</td>
+      <td>POST</td>
+      <td>id (URL parameter)</td>
+      <td>JSON object with movie title</td>
+      <td>Text message that movie was added to favorites</td>
+    </tr>
+    <tr>
+      <td>Delete movie from favorites</td>
+      <td>/users/:id/favorites</td>
+      <td>DELETE</td>
+      <td>id (URL parameter)</td>
+      <td>None</td>
+      <td>Text message that movie was deleted</td>
+    </tr>
+    <tr>
+      <td>Delete user</td>
+      <td>/users/:id</td>
+      <td>DELETE</td>
+      <td>id (URL parameter)</td>
+      <td>None</td>
+      <td>Text message that user was deleted</td>
+    </tr>
+    
+
+
+
+
+
+
+
+
+
+
+  </table>
+
 </body>
 </html>

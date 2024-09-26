@@ -36,7 +36,21 @@
       <td>GET</td>
       <td>title (URL parameter)</td>
       <td>None</td>
-      <td>JSON object with data about single movie (description, genre, director, image URL, whether it’s featured or not)</td>
+      <td>JSON object with data about single movie: {
+        Title: {type: String},
+        Description: {type: String},
+        Genre: {
+          Name: String,
+          Description: String
+        },
+        Director: {
+          Name: String,
+          Bio: String
+        },
+        Actors: [String],
+        ImagePath: String,
+        Featured: Boolean
+      }</td>
     </tr>
     <tr>
       <td>Return data about genre by title</td>
@@ -44,7 +58,7 @@
       <td>GET</td>
       <td>genreName (URL parameter)</td>
       <td>None</td>
-      <td>JSON object with genre description</td>
+      <td>JSON object with genre name and description</td>
     </tr>
     <tr>
       <td>Return data about director by name</td>
@@ -59,7 +73,12 @@
       <td>/users</td>
       <td>POST</td>
       <td>None</td>
-      <td>JSON object with user data (name, email, birthdate)</td>
+      <td>JSON object with user data: {
+        Username: {type: String, required: true},
+        Password: {type: String, required: true},
+        Email: {type: String, required: true},
+        Birthday: Date
+      }</td>
       <td>JSON object with data about new user, including id</td>
     </tr>
     <tr>
@@ -67,16 +86,16 @@
       <td>/users/:id</td>
       <td>PUT</td>
       <td>id (URL parameter)</td>
-      <td>JSON object with updated user data</td>
+      <td>JSON object with updated user data, e.g.: {"Email": "newEmail@example.com"}</td>
       <td>JSON object with updated user data</td>
     </tr>
     <tr>
       <td>Allow users to add movie to favorites</td>
-      <td>/users/:id/favorites/</td>
+      <td>/users/:Username/movies/:MovieID</td>
       <td>POST</td>
       <td>id (URL parameter)</td>
-      <td>JSON object with movie title</td>
-      <td>Text message that movie was added to favorites</td>
+      <td>None</td>
+      <td>JSON object with updated data</td>
     </tr>
     <tr>
       <td>Delete movie from favorites</td>
@@ -84,7 +103,7 @@
       <td>DELETE</td>
       <td>id (URL parameter)</td>
       <td>None</td>
-      <td>Text message that movie was deleted</td>
+      <td>JSON object with updated data</td>
     </tr>
     <tr>
       <td>Delete user</td>
@@ -92,19 +111,8 @@
       <td>DELETE</td>
       <td>id (URL parameter)</td>
       <td>None</td>
-      <td>Text message that user was deleted</td>
+      <td>Message that user was deleted</td>
     </tr>
-    
-
-
-
-
-
-
-
-
-
-
   </table>
 
 </body>

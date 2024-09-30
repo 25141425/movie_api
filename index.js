@@ -20,9 +20,15 @@ const Users = Models.User;
 
 const cors = require('cors');
 
+/* Local database
 mongoose.connect('mongodb://localhost:27017/cfDB', {useNewUrlParser: true, useUnifiedTopology: true});
+*/
 
+mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+/* Specifies which domains are allowed to make requests
 let allowedOrigins = ['http://localhost:8080'];
+*/
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -256,4 +262,4 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {ses
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on port ' + port);
-}); 
+});

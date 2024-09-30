@@ -16,7 +16,7 @@ passport.use(
       passwordField: 'Password',
     },
     async (username, password, callback) => {
-      console.log(`${username} ${password}`);
+     // console.log(`${username} ${password}`);
       await Users.findOne({Username: username})
       .then((user) => {
         if(!user) {
@@ -45,7 +45,7 @@ passport.use(
   new JWTStrategy(
     {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'your_jwt_secret' // Secret key to verify signature of JWT
+  secretOrKey: process.env.SecretKey // Secret key to verify signature of JWT
 }, async (jwtPayload, callback) => {
   return await Users.findById(jwtPayload._id)
   .then((user) => {

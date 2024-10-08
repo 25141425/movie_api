@@ -43,7 +43,7 @@ app.use(cors({
   }
 }));
 */
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -52,7 +52,6 @@ let auth = require('./auth') (app); // (app) esures that Express is available in
 const passport = require('passport');
 require('./passport');
 
-app.use(bodyParser.json());
 app.use(methodOverride());
 
 // create write stream (in append mode)

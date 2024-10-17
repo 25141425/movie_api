@@ -178,7 +178,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), asyn
 
 // Update user info by username
 // Added condition so users can only update their own data
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [check('Username', 'Username is required').isLength({min: 5}), check('Username', 'Username contains non alphanumeric characters – not allowed.').isAlphanumeric(), check('Password', 'Password is required').not().isEmpty(), check('Email', 'Email does not appear to be valid').isEmail()],
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [check('Username', 'Username contains non alphanumeric characters – not allowed.').isAlphanumeric(), check('Email', 'Email does not appear to be valid').isEmail()],
  async (req, res) => {
   let errors = validationResult(req);
 

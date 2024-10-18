@@ -192,6 +192,14 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
     return res.status(400).send('Not allowed!');
   }
 
+  if (req.body.Username) {
+    const existingUser = await Users.findOne({ Username: req.body.Username });
+
+    if (existingUser && existingUser.Username !== req.params.Username) {
+      return res.status(400).json({ message: 'Username already exists!' });
+    }
+  }
+
   const updateData = {
     Username: req.body.Username,
     Email: req.body.Email,

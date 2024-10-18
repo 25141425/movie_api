@@ -178,34 +178,45 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), asyn
 
 // Update user info by username
 // Added condition so users can only update their own data
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [check('Username', 'Username contains non alphanumeric characters – not allowed.').isAlphanumeric(), check('Email', 'Email does not appear to be valid').isEmail()],
- async (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
+  check('Username', 'Username contains non alphanumeric characters – not allowed.').isAlphanumeric(),
+  check('Email', 'Email does not appear to be valid').isEmail(),
+], async (req, res) => {
   let errors = validationResult(req);
 
-  if(!errors.isEmpty()) {
+  if (!errors.isEmpty()) {
     return res.status(422).json({errors: errors.array()});
   }
-  let hashedPassword = Users.hashPassword(req.body.Password);
-  if(req.user.Username !== req.params.Username){
+
+  if (req.user.Username !== req.params.Username) {
     return res.status(400).send('Not allowed!');
   }
-  await Users.findOneAndUpdate({Username: req.params.Username}, {$set:
-    {
-      Username: req.body.Username,
-      Password: hashedPassword,
-      Email: req.body.Email,
-      Birthday: req.body.Birthday
-    }
-  },
-  {new: true}) //returns updated document
-    .then((updatedUser) =>{
-      res.json(updatedUser);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.json(updatedUser);
-    })
+
+  const updateData = {
+    Username: req.body.Username,
+    Email: req.body.Email,
+    Birthday: req.body.Birthday
+  };
+
+  // Update password only if provided
+  if (req.body.Password) {
+    updateData.Password = Users.hashPassword(req.body.Password);
+  }
+
+  await Users.findOneAndUpdate(
+    { Username: req.params.Username },
+    { $set: updateData },
+    { new: true } //returns updated document
+  )
+  .then((updatedUser) => {
+    res.json(updatedUser);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error', error: err });
+  });
 });
+
 
 // Add movie to favorites 
 // To remove a movie use $pull insetad of $push
